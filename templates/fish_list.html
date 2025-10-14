@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="page">
+        <h2>قائمة الأسماك</h2>
+        
+        {% if fish_list %}
+        <div class="table-box">
+            <table>
+                <tr>
+                    <th>الاسم</th>
+                    <th>الوصف</th>
+                    <th>المصدر</th>
+                </tr>
+                {% for fish in fish_list %}
+                <tr>
+                    <td>{{ fish.name }}</td>
+                    <td>{{ fish.description or 'لا يوجد' }}</td>
+                    <td>
+                        {% if fish.source_url %}
+                            <a href="{{ fish.source_url }}" target="_blank" class="link">رابط</a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+            <div class="empty">
+                <p>لا توجد أسماك</p>
+                <a href="{{ url_for('add_fish') }}" class="btn orange">أضف أول سمكة</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
