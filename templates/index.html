@@ -2,12 +2,42 @@
 
 {% block content %}
     <div class="home">
-        <div class="welcome">
-            <h1>سجل الأسماك</h1>
-            <p>تطبيق ويب لإدارة أنواع الأسماك</p>
-            <div class="buttons">
-                <a href="{{ url_for('fish_list') }}" class="btn blue">عرض الأسماك</a>
-                <a href="{{ url_for('add_fish') }}" class="btn green">إضافة سمكة</a>
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="floating-fish">🐠</div>
+                <h1 class="main-title">سجل الأسماك العلمي</h1>
+                <p class="hero-description">
+                    نظام متكامل لتسجيل ودراسة الأنواع البحرية في البحر الأحمر
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>البحث العلمي</h3>
+                        <p>قاعدة بيانات شاملة للأسماك والكائنات البحرية</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>تحليل البيانات</h3>
+                        <p>دراسة الخصائص والأنماط البيئية للكائنات البحرية</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>التوثيق</h3>
+                        <p>نظام موثوق لتسجيل المشاهدات والبيانات العلمية</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="{{ url_for('fish_list') }}" class="btn primary-btn">
+                        <span>📁 عرض السجل العلمي</span>
+                    </a>
+                    <a href="{{ url_for('add_fish') }}" class="btn secondary-btn">
+                        <span>➕ إضافة سمكة جديدة</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

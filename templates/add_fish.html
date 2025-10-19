@@ -2,26 +2,55 @@
 
 {% block content %}
     <div class="page">
-        <h2>إضافة سمكة جديدة</h2>
+        <div class="page-header">
+            <h2>إضافة تسجيل علمي جديد</h2>
+            <p>أضف نوعاً جديداً إلى السجل العلمي للأسماك</p>
+        </div>
         
-        <div class="form-box">
-            <form method="POST">
-                <div class="field">
-                    <label>اسم السمكة</label>
-                    <input type="text" name="name" required>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data" class="data-form">
+                <div class="form-section">
+                    <h3>📝 البيانات الأساسية</h3>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>الاسم العلمي *</label>
+                            <input type="text" name="name" required placeholder="أدخل الاسم العلمي للسمكة">
+                        </div>
+                    </div>
                 </div>
-                <div class="field">
-                    <label>الوصف</label>
-                    <textarea name="description" rows="3"></textarea>
+
+                <div class="form-section">
+                    <h3>🖼 التوثيق البصري</h3>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>صورة السمكة</label>
+                            <label class="file-card">
+                                <div>📷</div>
+                                <div class="file-text">انقر لرفع صورة توثيقية</div>
+                                <input type="file" name="image" accept="image/*">
+                            </label>
+                            <img class="image-preview" alt="معاينة الصورة">
+                        </div>
+                    </div>
                 </div>
-                <div class="field">
-                    <label>رابط المصدر</label>
-                    <input type="url" name="source_url">
+
+                <div class="form-section">
+                    <h3>📋 المعلومات الوصفية</h3>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>الوصف التفصيلي</label>
+                            <textarea name="description" rows="4" placeholder="أدخل وصفاً تفصيلياً للسمكة..."></textarea>
+                        </div>
+                        <div class="field">
+                            <label>رابط المصدر المرجعي</label>
+                            <input type="url" name="source_url" placeholder="https://example.com">
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="actions">
-                    <button type="submit" class="btn green">إضافة</button>
-                    <a href="{{ url_for('fish_list') }}" class="btn gray">رجوع</a>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary-btn">💾 حفظ التسجيل</button>
+                    <a href="{{ url_for('fish_list') }}" class="btn secondary-btn">↶ رجوع للسجل</a>
                 </div>
             </form>
         </div>

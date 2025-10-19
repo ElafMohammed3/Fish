@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var closeButtons = document.querySelectorAll('.close');
-    closeButtons.forEach(function(button) {
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            var msg = this.parentElement;
+            const msg = this.parentElement;
             msg.style.display = 'none';
         });
     });
 
-    var messages = document.querySelectorAll('.msg');
-    messages.forEach(function(msg) {
-        setTimeout(function() {
+    const messages = document.querySelectorAll('.msg');
+    messages.forEach(msg => {
+        setTimeout(() => {
             if (msg.parentNode) {
                 msg.style.display = 'none';
             }
         }, 5000);
     });
 
-    var forms = document.querySelectorAll('form');
-    forms.forEach(function(form) {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
         form.addEventListener('submit', function(e) {
-            var required = this.querySelectorAll('[required]');
-            var valid = true;
+            const required = this.querySelectorAll('[required]');
+            let valid = true;
 
-            required.forEach(function(field) {
+            required.forEach(field => {
                 if (!field.value.trim()) {
                     valid = false;
                     field.style.borderColor = 'red';
@@ -36,6 +36,30 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!valid) {
                 e.preventDefault();
                 alert('املأ الحقول المطلوبة');
+            }
+        });
+    });
+
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(input => {
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = this.closest('.field').querySelector('.image-preview');
+            
+            const fileCardText = this.closest('.file-card')?.querySelector('.file-text');
+            if (fileCardText && file) {
+                fileCardText.textContent = file.name;
+            }
+            
+            if (file && preview) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else if (preview) {
+                preview.style.display = 'none';
             }
         });
     });

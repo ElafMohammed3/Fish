@@ -2,35 +2,59 @@
 
 {% block content %}
     <div class="page">
-        <h2>قائمة الأسماك</h2>
+        <div class="page-header">
+            <h2>السجل العلمي للأسماك</h2>
+            <p>قاعدة البيانات الشاملة للأنواع البحرية المسجلة</p>
+        </div>
+        
+        <div class="search-box">
+            <form action="{{ url_for('search_fish_route') }}" method="GET">
+                <input type="text" name="q" value="{{ search_term or '' }}" placeholder="ابحث في السجل العلمي...">
+                <button type="submit">🔍 بحث</button>
+            </form>
+        </div>
         
         {% if fish_list %}
-        <div class="table-box">
-            <table>
-                <tr>
-                    <th>الاسم</th>
-                    <th>الوصف</th>
-                    <th>المصدر</th>
-                </tr>
-                {% for fish in fish_list %}
-                <tr>
-                    <td>{{ fish.name }}</td>
-                    <td>{{ fish.description or 'لا يوجد' }}</td>
-                    <td>
-                        {% if fish.source_url %}
-                            <a href="{{ fish.source_url }}" target="_blank" class="link">رابط</a>
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>الصورة</th>
+                        <th>الاسم العلمي</th>
+                        <th>الوصف</th>
+                        <th>المصدر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fish in fish_list %}
+                    <tr>
+                        <td>
+                            {% if fish.image %}
+                                <img src="{{ url_for('get_image', fish_id=fish.id) }}" alt="{{ fish.name }}" class="fish-image">
+                            {% else %}
+                                <span class="no-image">🖼 لا توجد صورة</span>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ fish.name }}</strong></td>
+                        <td>{{ fish.description or 'لا يوجد وصف مسجل' }}</td>
+                        <td>
+                            {% if fish.source_url %}
+                                <a href="{{ fish.source_url }}" target="_blank" class="link">📎 المصدر</a>
+                            {% else %}
+                                <span class="no-link">─</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
         {% else %}
-            <div class="empty">
-                <p>لا توجد أسماك</p>
-                <a href="{{ url_for('add_fish') }}" class="btn orange">أضف أول سمكة</a>
+            <div class="empty-state">
+                <div class="empty-icon">🐠</div>
+                <h3>لا توجد تسجيلات</h3>
+                <p>لم يتم إضافة أي أسماك إلى السجل العلمي بعد</p>
+                <a href="{{ url_for('add_fish') }}" class="btn primary-btn">➕ بدء التسجيل</a>
             </div>
         {% endif %}
     </div>
