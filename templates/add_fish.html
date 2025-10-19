@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="page">
+        <h2>إضافة سمكة جديدة</h2>
+        
+        <div class="form-box">
+            <form method="POST">
+                <div class="field">
+                    <label>اسم السمكة</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="field">
+                    <label>الوصف</label>
+                    <textarea name="description" rows="3"></textarea>
+                </div>
+                <div class="field">
+                    <label>رابط المصدر</label>
+                    <input type="url" name="source_url">
+                </div>
+                
+                <div class="actions">
+                    <button type="submit" class="btn green">إضافة</button>
+                    <a href="{{ url_for('fish_list') }}" class="btn gray">رجوع</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

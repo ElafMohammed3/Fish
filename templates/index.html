@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="home">
+        <div class="welcome">
+            <h1>سجل الأسماك</h1>
+            <p>تطبيق ويب لإدارة أنواع الأسماك</p>
+            <div class="buttons">
+                <a href="{{ url_for('fish_list') }}" class="btn blue">عرض الأسماك</a>
+                <a href="{{ url_for('add_fish') }}" class="btn green">إضافة سمكة</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
